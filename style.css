@@ -84,23 +84,3 @@ model-viewer {
     animation: pulse 2s infinite;
     pointer-events: none;
 }
-
- /* Стиль для логотипов */
- .logo {
-    position: absolute;
-    width: 80px;  /* Размер логотипа */
-    height: auto;
-    opacity: 0.8; /* Полупрозрачность */
-}
-
-/* Логотип слева */
-.logo-left {
-    top: 25px;
-    left: 10px;
-}
-
-/* Логотип справа */
-.logo-right {
-    top: 10px;
-    right: 10px;
-}
