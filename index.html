@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Endi Christmas Tree</title>
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div id="loading-screen">
+        <div id="progress-bar">
+            <div id="progress"></div>
+        </div>
+    </div>
+
+    <model-viewer id="model-viewer" src="models/XMasTree.glb" alt="A 3D model Christmas Tree"
+        ar-modes="scene-viewer quick-look" ar-scale="auto" camera-controls touch-action="none" shadow-intensity="1"
+        interpolation-decay="200" min-camera-orbit="auto auto 5%" camera-orbit="-10deg -45deg 5m"
+        camera-target="0m 0m 0m" field-of-view="45deg" ar>
+
+        <button id="ar-button" slot="ar-button">AR-режим</button>
+        <div id="error" class="hide">AR is not supported on this device</div>
+
+    </model-viewer>
+
+    <script>
+        let modelViewer = document.querySelector('#model-viewer');
+        const loadingScreen = document.querySelector('#loading-screen');
+        const progressBar = document.querySelector('#progress');
+
+        modelViewer.addEventListener('progress', (event) => {
+            const progress = event.detail.totalProgress;
+            progressBar.style.width = `${progress * 100}%`;
+        });
+
+        modelViewer.addEventListener('load', () => {
+            loadingScreen.style.display = 'none';
+        });
+    </script>
+
+    <script>
+        document.querySelector("#model-viewer").addEventListener('ar-status', (event) => {
+            if (event.detail.status === 'failed') {
+                const error = document.querySelector("#error");
+                error.classList.remove('hide');
+                error.addEventListener('transitionend', (event) => {
+                    error.classList.add('hide');
+                });
+            }
+        });
+
+
+
+    </script>
+
+</body>
+
+</html>
